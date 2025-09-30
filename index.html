@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ishaan Gautam - Product Leader</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 90%, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background: #6366f1;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.15s ease;
+        }
+
+        .cursor-outline {
+            width: 32px;
+            height: 32px;
+            border: 2px solid rgba(99, 102, 241, 0.5);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.15s ease;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 10, 0.7);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #6366f1;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #6366f1;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5%;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            text-align: center;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-tag {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #6366f1 50%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease 0.4s both;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #9ca3af;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            animation: fadeInUp 1s ease 0.8s both;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            color: white;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #6366f1;
+            border: 2px solid #6366f1;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(99, 102, 241, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .section {
+            padding: 8rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff 0%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #9ca3af;
+            font-size: 1.2rem;
+            margin-bottom: 5rem;
+        }
+
+        .journey {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 5rem;
+        }
+
+        .journey-card {
+            flex: 1;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .journey-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .journey-card:hover {
+            transform: translateY(-10px);
+            border-color: #6366f1;
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.2);
+        }
+
+        .journey-card:hover::before {
+            opacity: 1;
+        }
+
+        .journey-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .journey-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .journey-card p {
+            color: #9ca3af;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .methodology-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .method-card {
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .method-card:hover {
+            transform: translateY(-5px);
+            border-color: #6366f1;
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .method-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #6366f1;
+        }
+
+        .method-card p {
+            color: #9ca3af;
+            font-size: 0.95rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin: 5rem 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: scale(1.05);
+            border-color: #6366f1;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #9ca3af;
+            font-size: 1rem;
+        }
+
+        .skills-section {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 5rem 5%;
+            margin: 5rem 0;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .skill-category {
+            padding: 2.5rem;
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .skill-category h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #6366f1;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .skill-tag {
+            padding: 0.6rem 1.2rem;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(99, 102, 241, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .experience-timeline {
+            position: relative;
+            padding: 3rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(180deg, #6366f1 0%, #a855f7 100%);
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            position: relative;
+            min-height: 200px;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-right: calc(50% + 40px);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: calc(50% + 40px);
+        }
+
+        .timeline-content {
+            flex: 1;
+            max-width: 550px;
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 20px;
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            border-color: #6366f1;
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.2);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 2.5rem;
+            width: 20px;
+            height: 20px;
+            background: #6366f1;
+            border: 4px solid #0a0a0a;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+        }
+
+        .timeline-date {
+            color: #6366f1;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-company {
+            color: #9ca3af;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-achievements {
+            list-style: none;
+            padding: 0;
+        }
+
+        .timeline-achievements li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: #9ca3af;
+            position: relative;
+        }
+
+        .timeline-achievements li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: #6366f1;
+        }
+
+        .contact-section {
+            text-align: center;
+            padding: 8rem 5%;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-card {
+            padding: 2rem 3rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 15px;
+            text-decoration: none;
+            color: #ffffff;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            border-color: #6366f1;
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 5%;
+            color: #6b7280;
+            border-top: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .competencies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .competency-card {
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 20px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .competency-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #6366f1 0%, #a855f7 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .competency-card:hover {
+            transform: translateY(-8px);
+            border-color: #6366f1;
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.25);
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .competency-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .competency-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .competency-icon {
+            font-size: 2.5rem;
+            filter: grayscale(0.3);
+        }
+
+        .competency-header h3 {
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .competency-scenario,
+        .competency-action,
+        .competency-result {
+            margin-bottom: 1.5rem;
+        }
+
+        .competency-scenario h4,
+        .competency-action h4,
+        .competency-result h4 {
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+            color: #6366f1;
+            font-weight: 700;
+        }
+
+        .competency-scenario p,
+        .competency-action p,
+        .competency-result p {
+            color: #d1d5db;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .competency-result {
+            background: rgba(99, 102, 241, 0.08);
+            padding: 1.2rem;
+            border-radius: 10px;
+            border-left: 3px solid #6366f1;
+            margin-bottom: 0;
+        }
+
+        .competency-result p {
+            color: #e5e7eb;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .competencies-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="gradient-bg"></div>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <nav>
+        <div class="logo">IG</div>
+        <ul class="nav-links">
+            <li><a href="#journey">Journey</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-tag">Software Engineer → Product Leader</div>
+            <h1>Ishaan Gautam</h1>
+            <p class="hero-subtitle">Transforming Complex Problems into Elegant Product Solutions</p>
+            <div class="cta-buttons">
+                <a href="#experience" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="journey" class="section">
+        <h2 class="section-title">My Product Journey</h2>
+        <p class="section-subtitle">From code to strategy, building products that matter</p>
+        
+        <div class="journey">
+            <div class="journey-card">
+                <div class="journey-icon">💻</div>
+                <h3>Engineering Foundation</h3>
+                <p>Started as a Software Engineer, building scalable web applications with MERN stack. Optimized performance, integrated APIs, and delivered user-focused solutions that taught me the importance of technical feasibility.</p>
+            </div>
+            <div class="journey-card">
+                <div class="journey-icon">🎯</div>
+                <h3>Product Thinking</h3>
+                <p>Evolved into product management by bridging engineering and business. Learned to prioritize features, conduct user research, and define product-market fit through data-driven insights and iterative development.</p>
+            </div>
+            <div class="journey-card">
+                <div class="journey-icon">🚀</div>
+                <h3>AI Innovation</h3>
+                <p>Now leading AI/ML products, implementing knowledge graphs and intelligent workflows. Combining technical depth with strategic vision to build next-generation solutions that scale and drive real business impact.</p>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">90%</div>
+                <div class="stat-label">Efficiency Gains</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">80%</div>
+                <div class="stat-label">Data Quality Improvement</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">70%</div>
+                <div class="stat-label">Conversion Rate Lift</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">50%</div>
+                <div class="stat-label">Engagement Boost</div>
+            </div>
+        </div>
+
+        <h3 class="section-title" style="font-size: 2rem; margin-top: 5rem;">Product Methodologies I Live By</h3>
+        <div class="methodology-grid">
+            <div class="method-card">
+                <h4>Agile & Scrum</h4>
+                <p>Iterative development with sprint planning, daily standups, and retrospectives to ensure continuous delivery and team alignment.</p>
+            </div>
+            <div class="method-card">
+                <h4>Jobs-to-be-Done</h4>
+                <p>Understanding the underlying reasons users "hire" a product, focusing on outcomes rather than features.</p>
+            </div>
+            <div class="method-card">
+                <h4>Product-Led Growth</h4>
+                <p>Using the product itself as the primary driver of acquisition, activation, and retention through exceptional user experience.</p>
+            </div>
+            <div class="method-card">
+                <h4>OKRs Framework</h4>
+                <p>Setting ambitious objectives with measurable key results to align teams and track progress toward strategic goals.</p>
+            </div>
+            <div class="method-card">
+                <h4>Lean Product</h4>
+                <p>Build-measure-learn cycles to validate assumptions quickly and pivot based on real user feedback and data.</p>
+            </div>
+            <div class="method-card">
+                <h4>Design Thinking</h4>
+                <p>Empathize, define, ideate, prototype, and test to create human-centered solutions that solve real problems.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="skills-section">
+        <h2 class="section-title">Technical Product Arsenal</h2>
+        <p class="section-subtitle">Bridging engineering excellence with strategic product vision</p>
+        
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>Product Management</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Agile/Scrum</span>
+                    <span class="skill-tag">Roadmapping</span>
+                    <span class="skill-tag">User Stories</span>
+                    <span class="skill-tag">Feature Prioritization</span>
+                    <span class="skill-tag">Product-Market Fit</span>
+                    <span class="skill-tag">Go-to-Market</span>
+                    <span class="skill-tag">A/B Testing</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Technical Stack</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">LangChain</span>
+                    <span class="skill-tag">RAG</span>
+                    <span class="skill-tag">React JS</span>
+                    <span class="skill-tag">Redux</span>
+                    <span class="skill-tag">PostgreSQL</span>
+                    <span class="skill-tag">NoSQL</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Product Tools</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">JIRA</span>
+                    <span class="skill-tag">Figma</span>
+                    <span class="skill-tag">n8n</span>
+                    <span class="skill-tag">Make.com</span>
+                    <span class="skill-tag">Google Cloud</span>
+                    <span class="skill-tag">Azure</span>
+                    <span class="skill-tag">Streamlit</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Data & Analytics</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Pandas</span>
+                    <span class="skill-tag">NumPy</span>
+                    <span class="skill-tag">Matplotlib</span>
+                    <span class="skill-tag">User Research</span>
+                    <span class="skill-tag">Data Pipelines</span>
+                    <span class="skill-tag">Analytics</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="experience" class="section">
+        <h2 class="section-title">Product Impact Timeline</h2>
+        <p class="section-subtitle">Delivering measurable results through strategic product leadership</p>
+        
+        <div class="experience-timeline">
+            <div class="timeline-line"></div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">Jan 2025 – Present</div>
+                    <h3 class="timeline-title">AI/ML Product Lead</h3>
+                    <div class="timeline-company">HyggeX World</div>
+                    <ul class="timeline-achievements">
+                        <li>Implemented knowledge graph architecture enhancing analytics and insights, improving data quality by 80%</li>
+                        <li>Developed AI-driven workflows for lead generation and adaptive learning, boosting operational efficiency by 90%</li>
+                        <li>Optimized data pipelines reducing content delivery time by 40% and enhancing overall UX</li>
+                        <li>Led cross-functional collaboration aligning product roadmaps with business objectives, driving 40% higher retention</li>
+                        <li>Applied data-driven insights to refine acquisition strategies, boosting user engagement by 50%</li>
+                    </ul>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">Oct 2024 – Dec 2024</div>
+                    <h3 class="timeline-title">Product Management Intern</h3>
+                    <div class="timeline-company">HyggeX World</div>
+                    <ul class="timeline-achievements">
+                        <li>Designed high-fidelity product screens and UX flows in Figma enhancing user engagement</li>
+                        <li>Conducted user research applying data-driven acquisition strategies, improving conversions by 70%</li>
+                        <li>Defined and iterated product-market fit leveraging market insights and user feedback</li>
+                        <li>Developed landing page increasing user retention and lead generation by 40%</li>
+                        <li>Executed competitor research and SWOT analysis informing product strategy</li>
+                    </ul>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">May 2022 – Sep 2024</div>
+                    <h3 class="timeline-title">Software Engineer</h3>
+                    <div class="timeline-company">Tech Prastish Software Solutions</div>
+                    <ul class="timeline-achievements">
+                        <li>Optimized website performance achieving 40% reduction in load times and enhanced user satisfaction</li>
+                        <li>Led frontend development utilizing UI libraries ensuring scalability and design consistency</li>
+                        <li>Designed database structures and resolved security vulnerabilities strengthening data integrity</li>
+                        <li>Integrated third-party APIs (Stripe, Maps, Amadeus) boosting feature adoption by 15%</li>
+                        <li>Contributed to product roadmaps balancing technical feasibility with user-focused goals</li>
+                    </ul>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">Nov 2021 – Apr 2022</div>
+                    <h3 class="timeline-title">Web Development Intern</h3>
+                    <div class="timeline-company">AD Infotech Solutions</div>
+                    <ul class="timeline-achievements">
+                        <li>Implemented Redux for state management in e-commerce platform, boosting checkout speed by 15%</li>
+                        <li>Executed performance optimization techniques improving loading speeds by 30%</li>
+                        <li>Contributed to dynamic landing pages driving 10% increase in user sign-ups</li>
+                    </ul>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pm-competencies" class="section">
+        <h2 class="section-title">Product Management Competencies</h2>
+        <p class="section-subtitle">Real scenarios, tactical decisions, measurable outcomes</p>
+        
+        <div class="competencies-grid">
+            <div class="competency-card">
+                <div class="competency-header">
+                    <div class="competency-icon">🎯</div>
+                    <h3>Behavioral & Leadership</h3>
+                </div>
+                <div class="competency-scenario">
+                    <h4>Situation:</h4>
+                    <p>At HyggeX, faced resistance from engineering team when proposing AI-driven knowledge graph implementation due to concerns about complexity and timeline impact.</p>
+                </div>
+                <div class="competency-action">
+                    <h4>Action:</h4>
+                    <p>Organized collaborative workshops to break down the implementation into phases. Demonstrated MVP with quick wins, shared competitor analysis, and established clear success metrics. Facilitated daily standups to address blockers and celebrated early wins to build momentum.</p>
+                </div>
+                <div class="competency-result">
+                    <h4>Result:</h4>
+                    <p>Team buy-in achieved within 2 weeks. Successfully implemented knowledge graph improving data quality by 80%, delivered on time through agile sprints.</p>
+                </div>
+            </div>
+
+            <div class="competency-card">
+                <div class="competency-header">
+                    <div class="competency-icon">💡</div>
+                    <h3>Product Sense & Design</h3>
+                </div>
+                <div class="competency-scenario">
+                    <h4>Situation:</h4>
+                    <p>AdaptMate platform had low user engagement despite having rich adaptive learning content. Users were dropping off during onboarding.</p>
+                </div>
+                <div class="competency-action">
+                    <h4>Action:</h4>
+                    <p>Conducted user research sessions and analyzed funnel metrics. Discovered users felt overwhelmed by initial setup. Designed simplified onboarding flow in Figma with progressive disclosure - starting with minimal inputs and gradually introducing features. Created high-fidelity prototypes and ran usability tests with 20+ users.</p>
+                </div>
+                <div class="competency-result">
+                    <h4>Result:</h4>
+                    <p>Improved user engagement by 50% and increased retention by 40%. Conversion rate from landing page jumped by 70%.</p>
+                </div>
+            </div>
+
+            <div class="competency-card">
+                <div class="competency-header">
+                    <div class="competency-icon">🚀</div>
+                    <h3>Strategy & Vision</h3>
+                </div>
+                <div class="competency-scenario">
+                    <h4>Situation:</h4>
+                    <p>HyggeX needed to differentiate AdaptMate in competitive edtech market while scaling AI capabilities for personalized learning.</p>
+                </div>
+                <div class="competency-action">
+                    <h4>Action:</h4>
+                    <p>Conducted SWOT analysis and competitor research across 10+ edtech platforms. Identified gap in AI-driven adaptive learning combined with real-time progress tracking. Developed 18-month product roadmap focusing on: Phase 1 - AI content recommendation engine, Phase 2 - Knowledge graph for learning pathways, Phase 3 - Predictive analytics for learner outcomes. Aligned stakeholders through quarterly OKR planning.</p>
+                </div>
+                <div class="competency-result">
+                    <h4>Result:</h4>
+                    <p>Secured leadership approval for AI-first strategy. Improved market positioning leading to 90% efficiency gains in content delivery through automated workflows.</p>
+                </div>
+            </div>
+
+            <div class="competency-card">
+                <div class="competency-header">
+                    <div class="competency-icon">📊</div>
+                    <h3>Analytical & Metrics</h3>
+                </div>
+                <div class="competency-scenario">
+                    <h4>Situation:</h4>
+                    <p>Needed to optimize AdaptMate's content delivery pipeline which was causing 2-3 second delays affecting user experience and completion rates.</p>
+                </div>
+                <div class="competency-action">
+                    <h4>Action:</h4>
+                    <p>Set up analytics instrumentation to track: content load times, user drop-off points, and engagement metrics. Used SQL to analyze 50K+ user sessions identifying bottlenecks. Discovered database queries were unoptimized and content wasn't properly cached. Worked with engineering to implement indexing, query optimization, and CDN integration. Ran A/B tests comparing old vs new pipeline with 5K users per variant.</p>
+                </div>
+                <div class="competency-result">
+                    <h4>Result:</h4>
+                    <p>Reduced content delivery time by 40%. Statistical significance achieved (p < 0.05) showing 25% improvement in course completion rates.</p>
+                </div>
+            </div>
+
+            <div class="competency-card">
+                <div class="competency-header">
+                    <div class="competency-icon">⚙️</div>
+                    <h3>Technical Competency</h3>
+                </div>
+                <div class="competency-scenario">
+                    <h4>Situation:</h4>
+                    <p>At Tech Prastish, needed to build real-time chat application for enterprise clients requiring WhatsApp-like features: message delivery status, typing indicators, file sharing, and end-to-end encryption.</p>
+                </div>
+                <div class="competency-action">
+                    <h4>Action:</h4>
+                    <p>Architected solution using Socket.io for WebSocket connections, Redis for message queuing and presence tracking, MongoDB for message persistence, and React with Redux for state management. Implemented message acknowledgment system (sent/delivered/read), optimistic UI updates for instant feedback, and chunked file uploads with progress tracking. Integrated Stripe API for premium features and Google Maps API for location sharing.</p>
+                </div>
+                <div class="competency-result">
+                    <h4>Result:</h4>
+                    <p>Delivered production-ready chat application handling 10K+ concurrent users. Achieved 40% improvement in load times through code splitting and lazy loading. Feature adoption increased by 15% after API integrations.</p>
+                </div>
+            </div>
+
+            <div class="competency-card">
+                <div class="competency-header">
+                    <div class="competency-icon">🎲</div>
+                    <h3>Prioritization & Execution</h3>
+                </div>
+                <div class="competency-scenario">
+                    <h4>Situation:</h4>
+                    <p>HyggeX had limited engineering resources (3 developers) with backlog of 40+ feature requests from marketing, sales, and users for AdaptMate platform.</p>
+                </div>
+                <div class="competency-action">
+                    <h4>Action:</h4>
+                    <p>Created RICE scoring framework (Reach × Impact × Confidence / Effort) for all features. Facilitated prioritization workshop with stakeholders scoring each feature. Top priorities emerged: AI lead generation workflow (RICE: 85), Landing page optimization (RICE: 72), Analytics dashboard (RICE: 68). Organized 2-week sprints with clear acceptance criteria. Used JIRA for tracking with story points, maintained burndown charts, and conducted sprint retrospectives.</p>
+                </div>
+                <div class="competency-result">
+                    <h4>Result:</h4>
+                    <p>Delivered 3 high-impact features in 6 weeks. AI workflow improved lead generation efficiency by 90%. Team velocity increased by 30% through better focus.</p>
+                </div>
+            </div>
+
+            <div class="competency-card">
+                <div class="competency-header">
+                    <div class="competency-icon">📏</div>
+                    <h3>Estimation & Planning</h3>
+                </div>
+                <div class="competency-scenario">
+                    <h4>Situation:</h4>
+                    <p>Leadership requested timeline estimate for implementing knowledge graph feature at HyggeX - a technically complex initiative with unclear scope.</p>
+                </div>
+                <div class="competency-action">
+                    <h4>Action:</h4>
+                    <p>Broke down feature into: data modeling (3 days), graph database setup (2 days), API development (5 days), frontend integration (4 days), testing & optimization (3 days). Conducted planning poker session with engineering team. Applied 1.5x buffer for unknowns based on team's historical velocity. Created detailed project plan with dependencies mapped in JIRA, identified critical path, and set weekly milestones with clear deliverables.</p>
+                </div>
+                <div class="competency-result">
+                    <h4>Result:</h4>
+                    <p>Completed implementation in 21 days vs 17 days estimated (19% variance - within acceptable range). Accurate estimation built stakeholder trust and enabled better resource planning for subsequent projects.</p>
+                </div>
+            </div>
+
+            <div class="competency-card">
+                <div class="competency-header">
+                    <div class="competency-icon">🎖️</div>
+                    <h3>Cross-Functional Leadership</h3>
+                </div>
+                <div class="competency-scenario">
+                    <h4>Situation:</h4>
+                    <p>AdaptMate launch required coordination between engineering (3 devs), marketing (2 members), content team (4 members), and external design agency - all with conflicting priorities and timelines.</p>
+                </div>
+                <div class="competency-action">
+                    <h4>Action:</h4>
+                    <p>Established weekly sync meetings with clear agendas and action items. Created shared roadmap visible to all teams with color-coded dependencies. Set up Slack channels for each workstream. When marketing requested feature changes 1 week before launch, facilitated trade-off discussion showing impact on timeline. Negotiated compromise: launched with MVP features, marked enhanced features for v1.1. Maintained transparent communication through daily updates and risk register.</p>
+                </div>
+                <div class="competency-result">
+                    <h4>Result:</h4>
+                    <p>Successfully launched AdaptMate on time. Achieved 40% increase in user retention. Post-launch survey showed 92% team satisfaction with collaboration process. Retention improved by 40% through aligned execution.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <h2 class="section-title">Let's Build Something Great</h2>
+        <p class="section-subtitle">Always open to discussing product strategy, AI innovations, or collaboration opportunities</p>
+        
+        <div class="contact-links">
+            <a href="mailto:ishaangautam959553@gmail.com" class="contact-card">
+                <span class="contact-icon">📧</span>
+                <span>Email Me</span>
+            </a>
+            <a href="https://www.linkedin.com/in/ishaangautam9595/" target="_blank" class="contact-card">
+                <span class="contact-icon">💼</span>
+                <span>LinkedIn</span>
+            </a>
+            <a href="https://bento.me/ishaangautam" target="_blank" class="contact-card">
+                <span class="contact-icon">🔗</span>
+                <span>Portfolio</span>
+            </a>
+            <a href="tel:+918607429792" class="contact-card">
+                <span class="contact-icon">📱</span>
+                <span>+91 860-742-9792</span>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Ishaan Gautam. Crafted with precision and passion.</p>
+        <p style="margin-top: 0.5rem;">Inspired by the sleek designs of modern tech portfolios.</p>
+    </footer> 
